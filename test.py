@@ -175,6 +175,14 @@ def upload_file(dfData):
     print(len(d_Class))
     chinhxac = round(dem / len(d_Class), 2) * 100
     print('độ chính xác', chinhxac)
+    veryLow = (d_Class == 'Very Low').sum()
+    print(veryLow)
+    low = (d_Class == 'Low').sum()
+    print(low)
+    middle = (d_Class == 'Middle').sum()
+    print(middle)
+    high = (d_Class == 'High').sum()
+    print(high)
     # string1 = 'Result : '
     string2 = 'Correct Prediction : ' + str(dem)
     string3 = 'Accuracy : ' + str(chinhxac) + '%'
@@ -185,6 +193,6 @@ def upload_file(dfData):
     # my_str2.set(string2)
     # my_str3.set(string3)
 
-    return (string2,string3,string,w,conclusion)
+    return (string2,string3,string,w,conclusion,veryLow,low,middle,high)
 
 # my_w.mainloop()  # Keep the window open

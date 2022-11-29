@@ -3,6 +3,7 @@
 from tkinter import *
 from tkinter import filedialog,ttk
 import pandas
+import matplotlib.pyplot as plt
 import test
 
 data = pandas.DataFrame
@@ -156,13 +157,14 @@ weightLabel.place(x=10,y=210)
 
 weightLabel2 = Label(rightFrame,anchor=W)
 weightLabel2.place(x=10,y=240)
+
 # Hien thi ket qua
 def updateResult(data):
 
     if data.empty:
         browseLabel.configure(text='Empty data')
     else:
-        (str1,str2,str3,df,conclusion)=test.upload_file(data)
+        (str1,str2,str3,df,conclusion,veryLow,low,middle,high)=test.upload_file(data)
 
         numberLabel.configure(text=str3)
         correctLabel.configure(text=str1)
@@ -170,6 +172,11 @@ def updateResult(data):
 
         string1 = df.to_string(index=True)
         weightLabel2.configure(text=string1)
+
+        weights = [veryLow,low,middle,high]
+        la = ["Very Low", "Low", "Middle", "High"]
+        plt.pie(weights, labels=la)
+        plt.show()
 
         data = pandas.concat([data,pandas.Series(conclusion,name='Prediction')],axis=1)
 
